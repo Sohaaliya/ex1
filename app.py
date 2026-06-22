@@ -1,5 +1,6 @@
 from transformers import pipeline
 import gradio as gr
+import os
 
 generator = pipeline(
     "text-generation",
@@ -28,4 +29,9 @@ iface = gr.Interface(
     title="GPT-2 Text Generator"
 )
 
-iface.launch()
+port = int(os.environ.get("PORT", 7860))
+
+iface.launch(
+    server_name="0.0.0.0",
+    server_port=port
+)
